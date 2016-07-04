@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload = function (){
+			var canvas = document.getElementById("canvas");
+			canvas.width = 600;
+			canvas.height = 600;
+			canvas.style.border = "1px solid #000";
+			var ctx =  canvas.getContext("2d");
+//			会将画布平移，移到那里那里就是画布的x,y轴的起点(0,0)
+//			ctx.fillRect(0,0,100,100)
+			ctx.translate(200,200)
+			ctx.fillRect(0,0,100,100)
+			ctx.fillRect(-100,-100,100,100)
+
+		}
+
+	</script>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+</body>
+</html>

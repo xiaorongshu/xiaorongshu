@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload=function(){
+            var myCanvas=document.getElementById('myCanvas')
+            myCanvas.width=600;
+            myCanvas.height=600;
+            myCanvas.style.border='1px solid #ccc';
+            var ctx=myCanvas.getContext('2d');
+//            scale会对画布进行缩放，而不是矩形，这点要搞清楚，
+//            而且只会对之后画的图形产生影响，对之前的不产生影响
+            ctx.fillRect(0,0,100,100)
+            ctx.arc(100,100,50,0,2*Math.PI)
+            ctx.scale(2,2)
+//            ctx.scale('200%','200%')
+            ctx.fillStyle='red'
+            ctx.fillRect(100,100,100,100)
+            ctx.arc(100,100,50,0,2*Math.PI)
+            ctx.stroke()
+
+        }
+
+    </script>
+</head>
+<body>
+<canvas id='myCanvas'>
+    您的浏览器不支持canvas，请您升级您的浏览器版本
+</canvas>
+
+</body>
+</html>

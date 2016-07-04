@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload=function(){
+            function Person(option){
+                this._init(option);
+            }
+            Person.prototype={
+                _init:function(option){
+                    this.width=option.width ||40
+                    this.height=option.height ||65
+                    this.imgSrc=option.imgSrc
+                    this.x=option.x
+                    this.y=option.y
+                    this.step=option.step,
+                    this.dir=option.dir,
+                    this.status=0
+                },
+                render:function(ctx){
+                    _this=this;
+                    var img= new Image();
+                    img.src=this.imgSrc
+                        img.onload=function(){
+                            var index=0
+                            setInterval(function(){
+                                ctx.beginPath()
+                                ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height)
+                                ctx.drawImage(
+                                        img,
+                                        _this.width*index,
+                                        _this.height*_this.status,
+                                        _this.width,
+                                        _this.height,
+                                        _this.x,
+                                        _this.y,
+                                        _this.width,
+                                        _this.height
+                                )
+                                index++;
+                                index %=4;
+                            },1000/_this.step)
+                        }
+                },
+                change:function(dir){
+                    switch(dir){
+                        case 'bottom':
+                            this.status=0
+                            break;
+                        case 'top':
+                            this.status=3
+                            break;
+                        case 'left':
+                            this.status=1
+                            break;
+                        case 'right':
+                            this.status=2
+                            break;
+                    }
+                }
+            }
+            var myCanvas=document.getElementById('myCanvas')
+            myCanvas.width=600;
+            myCanvas.height=600;
+            myCanvas.style.border='1px solid #ccc';
+            var ctx=myCanvas.getContext('2d')
+            var p=new Person({
+                width:40,
+                height:65,
+                x:100,
+                y:100,
+                imgSrc:'imgs/2.png',
+                step:10
+            })
+            p.render(ctx);
+
+            var top= document.getElementById('top')
+            var bottom= document.getElementById('bottom')
+            var left= document.getElementById('left')
+            var right= document.getElementById('right')
+
+            top.onclick=function(){
+                p.change('top');
+            }
+            bottom.onclick=function(){
+                p.change('bottom');
+            }
+            left.onclick=function(){
+                p.change('left');
+            }
+            right.onclick=function(){
+                p.change('right');
+            }
+
+        }
+    </script>
+</head>
+<body>
+<canvas id='myCanvas'></canvas>
+<input type="button" value="↑" id='top'/>
+<input type="button" value="←" id='left'/>
+<input type="button" value="↓" id='bottom'/>
+<input type="button" value="→" id='right'/>
+<!--↖↗↘↙-->
+</body>
+</html>

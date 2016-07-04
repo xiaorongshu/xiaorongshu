@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload=function(){
+            function Person(option){
+                this._init(option)
+            }
+            Person.prototype={
+                _init:function(option){
+                    this.width=option.width || 256
+                    this.height=option.height || 256
+
+                }
+            }
+            var myCanvas=document.getElementById('myCanvas')
+            myCanvas.width=600;
+            myCanvas.height=600;
+            myCanvas.style.border='1px solid #ccc';
+            var ctx=myCanvas.getContext('2d')
+            var img=new Image()
+            img.src='imgs/3.png'
+            img.onload=function(){
+                var width=img.width/8
+                var height=img.height/8
+                var status=0
+                var dir=0
+                setInterval(function(){
+                    ctx.clearRect(0,0,myCanvas.width,myCanvas.height)
+                    ctx.drawImage(img,width*status,height*dir,width,height,300,300,width,height)
+                    status++
+                    if(status==4){
+                        status=0
+                    }
+                },1000/5)
+                var tLeft=document.getElementById('tLeft')
+                var top=document.getElementById('top')
+                var tRight=document.getElementById('tRight')
+                var bLeft=document.getElementById('bLeft')
+                var bRight=document.getElementById('bRight')
+                var left=document.getElementById('left')
+                var bottom=document.getElementById('bottom')
+                var right=document.getElementById('right')
+                var data1=[left,tLeft,top,tRight,right,bRight,bottom,bLeft]
+                for(var i=0;i<data1.length;i++){
+                    data1[i].onclick=(function(k){
+                        var n=k
+                        return function(){
+                            dir=n
+                            console.log(dir)
+                        }
+                    })(i)
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<canvas id='myCanvas'></canvas>
+<input type="button" value="↖" id='tLeft'/>
+<input type="button" value="↑" id='top'/>
+<input type="button" value="↗" id='tRight'/>
+<input type="button" value="→" id='right'/>
+<input type="button" value="↘" id='bRight'/>
+<input type="button" value="↓" id='bottom'/>
+<input type="button" value="↙" id='bLeft'/>
+<input type="button" value="←" id='left'/>
+</body>
+</html>

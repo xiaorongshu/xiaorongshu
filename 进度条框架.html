@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F0F0F0;
+        }
+        #div1{
+            position: absolute;
+            left:50%;
+            top:13%;
+            color:red;
+        }
+    </style>
+    <script src='js/konva.min.js'></script>
+    <script>
+        window.onload=function(){
+            var div=document.getElementById('div1')
+            var i=0;
+            clearInterval(timer)
+             var timer=setInterval(function(){
+                    div.innerHTML='努力加载中'+i+'%'
+                    i+=1;
+                 if(i>100){
+                     clearInterval(timer)
+                 }
+             },50)
+            var  width=window.innerWidth;
+            var height=window.innerHeight;
+            var sta=new Konva.Stage({
+                container:'cont',
+                width:width,
+                height:height
+            });
+            var lay=new Konva.Layer()
+            var rect=new Konva.Rect({
+                x:130,
+                y:130,
+                width:50,
+                height:30,
+                fill: "red",
+                cornerRadius:20,
+            });
+            lay.add(rect);
+            sta.add(lay);
+            var tween=new Konva.Tween({
+                node:rect,
+                duration:5,
+                fill: "red",
+                width:1000,
+            })
+            tween.play()
+        }
+    </script>
+</head>
+<body>
+<div id='div1'></div>
+<div id="cont"></div>
+</body>
+</html>

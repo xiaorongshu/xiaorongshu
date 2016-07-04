@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function (){
+            var canvas = document.getElementById("canvas");
+            canvas.width = 600;
+            canvas.height = 600;
+            canvas.style.border = "1px solid #000";
+            var ctx =  canvas.getContext("2d");
+
+            ctx.fillRect(100,100,100,100);
+
+            //旋转画布,以当前画布的圆点为旋转的圆心，也是只会影响旋转后的内容，不会影响之前的内容
+            ctx.translate(150,150);
+            ctx.rotate(30 * Math.PI / 180);
+            ctx.fillRect(-50,-50,100,100);
+//			var angle = 30;
+//			setInterval(function(){
+//				ctx.clearRect(0,0,canvas.width,canvas.height);
+//				ctx.rotate(angle * Math.PI / 180);
+//				angle +=10;
+//				angle %= 360;
+//				ctx.fillRect(-50,-50,100,100);
+//			},1000/10);
+
+        }
+
+    </script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+</html>
